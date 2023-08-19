@@ -1,0 +1,19 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: SIMPLE_PRJ
+    password: song1234!
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.project.simpleB.*.entity
