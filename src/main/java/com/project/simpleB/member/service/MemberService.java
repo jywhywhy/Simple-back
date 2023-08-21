@@ -9,6 +9,8 @@ import java.util.List;
 public interface MemberService {
     MemberDTO signIn(MemberDTO memberDTO);
 
+    int signUp(MemberDTO memberDTO);
+
     List<MemberDTO> list();
 
 }

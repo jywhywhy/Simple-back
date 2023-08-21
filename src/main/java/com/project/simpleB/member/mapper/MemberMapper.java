@@ -9,5 +9,8 @@ import java.util.List;
 public interface MemberMapper {
     Member signIn(Member member);
 
+    int signUp(Member member);
+
     List<Member> list();
+
 }

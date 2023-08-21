@@ -27,6 +27,17 @@ public class MemberController {
         return new ResponseEntity<>(tmp, HttpStatus.OK);
     }
 
+    @PostMapping("/signUp")
+    public ResponseEntity<Void> signUp(@RequestBody MemberDTO memberDTO) {
+        int result = memberService.signUp(memberDTO);
+
+        if (result < 1) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @GetMapping("/list")
     public ResponseEntity<List<MemberDTO>> list() {
         List<MemberDTO> list = memberService.list();

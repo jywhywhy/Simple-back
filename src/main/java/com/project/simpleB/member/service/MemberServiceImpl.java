@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class MemberServiceImpl implements MemberService{
 
     private final MemberMapper memberMapper;
-
     @Override
     public MemberDTO signIn(MemberDTO memberDTO) {
         Member member = memberMapper.signIn(
@@ -32,6 +31,15 @@ public class MemberServiceImpl implements MemberService{
                 .mId(member.getMId())
                 .mName(member.getMName())
                 .build();
+    }
+
+    @Override
+    public int signUp(MemberDTO memberDTO) {
+        return memberMapper.signUp(Member.builder()
+                .mName(memberDTO.getMName())
+                .username(memberDTO.getUsername())
+                .password(memberDTO.getPassword())
+                .build());
     }
 
     @Override
