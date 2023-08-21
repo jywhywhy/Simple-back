@@ -7,6 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface MemberMapper {
+    Member signIn(Member member);
 
     List<Member> list();
 }
