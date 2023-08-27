@@ -15,5 +15,4 @@ public class Board {
     private Date bCreateDate;
     private Date bUpdateDate;
     private long bViews;
-    private char bType;
 }

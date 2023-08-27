@@ -11,7 +11,7 @@
     </select>
 
     <insert id="signUp">
-        INSERT INTO MEMBER (M_ID, M_NAME, USERNAME, PASSWORD) VALUES (SEQ_BOARD.nextval, #{mName}, #{username}, #{password})
+        INSERT INTO MEMBER (M_NAME, USERNAME, PASSWORD) VALUES (#{mName}, #{username}, #{password})
     </insert>
 
     <select id="list" resultType="Member">
