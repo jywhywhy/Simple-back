@@ -31,18 +31,18 @@ public class MemberController {
     public ResponseEntity<Void> signUp(@RequestBody MemberDTO memberDTO) {
         int result = memberService.signUp(memberDTO);
 
-        if (result < 1) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        if (result >= 1) {
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @GetMapping("/list")
     public ResponseEntity<List<MemberDTO>> list() {
         List<MemberDTO> list = memberService.list();
 
-        if (list.isEmpty()) {
+        if (list == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 

@@ -17,7 +17,6 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public int write(BoardDTO boardDTO) {
-        System.out.println(boardDTO.getMId());
         return boardMapper.write(Board.builder()
                 .mId(boardDTO.getMId())
                 .bTitle(boardDTO.getBTitle())
@@ -27,9 +26,13 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public List<BoardDTO> list() {
-        List<Board> boardList = boardMapper.list();
+        List<Board> list = boardMapper.list();
 
-        return boardList.stream()
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list.stream()
                 .map(board -> BoardDTO.builder()
                         .bId(board.getBId())
                         .mId(board.getMId())
@@ -39,5 +42,24 @@ public class BoardServiceImpl implements BoardService{
                         .bViews(board.getBViews())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public BoardDTO detail(long bId) {
+        Board board = boardMapper.detail(bId);
+
+        if (board == null) {
+            return null;
+        }
+
+        return BoardDTO.builder()
+                .bId(board.getBId())
+                .mId(board.getMId())
+                .bTitle(board.getBTitle())
+                .bContent(board.getBContent())
+                .bViews(board.getBViews())
+                .bCreateDate(board.getBCreateDate())
+                .bUpdateDate(board.getBUpdateDate())
+                .build();
     }
 }

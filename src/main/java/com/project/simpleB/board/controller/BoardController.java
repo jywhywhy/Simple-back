@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +33,22 @@ public class BoardController {
     @GetMapping("/list")
     public ResponseEntity<List<BoardDTO>> list() {
         List<BoardDTO> list = boardService.list();
-        System.out.println("test");
-        if (list.isEmpty()) {
+
+        if (list == null) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
 
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{bId}")
+    public ResponseEntity<BoardDTO> detail(@PathVariable long bId) {
+        BoardDTO boardDTO = boardService.detail(bId);
+
+        if (boardDTO == null) {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(boardDTO, HttpStatus.OK);
     }
 }

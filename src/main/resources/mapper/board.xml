@@ -9,6 +9,10 @@
     </insert>
 
     <select id="list" resultType="Board">
-        SELECT * FROM BOARD
+        SELECT * FROM BOARD ORDER BY B_ID DESC
+    </select>
+
+    <select id="detail" resultType="Board">
+        SELECT * FROM BOARD WHERE B_ID = #{bId}
     </select>
 </mapper>

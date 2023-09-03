@@ -10,4 +10,6 @@ public interface BoardService {
     int write(BoardDTO boardDTO);
 
     List<BoardDTO> list();
+
+    BoardDTO detail(long bId);
 }

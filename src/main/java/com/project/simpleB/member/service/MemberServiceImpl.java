@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class MemberServiceImpl implements MemberService{
 
     private final MemberMapper memberMapper;
+
     @Override
     public MemberDTO signIn(MemberDTO memberDTO) {
         Member member = memberMapper.signIn(
@@ -44,9 +45,13 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<MemberDTO> list() {
-        List<Member> memberList = memberMapper.list();
+        List<Member> list = memberMapper.list();
 
-        return memberList.stream()
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list.stream()
                 .map(member -> MemberDTO.builder()
                         .mName(member.getMName())
                         .build())

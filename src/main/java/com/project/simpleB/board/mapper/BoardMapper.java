@@ -7,7 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
+
     int write(Board build);
 
     List<Board> list();
+
+    Board detail(long bId);
 }

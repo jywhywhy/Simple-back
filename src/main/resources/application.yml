@@ -17,3 +17,28 @@ spring:
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
   type-aliases-package: com.project.simpleB.*.entity
+
+---
+server:
+  port: 90
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/SIMPLE_PRJ?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: SIMPLE_PRJ
+    password: song1234!
+  config:
+    activate:
+      on-profile: mysql
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.project.simpleB.*.entity
+
