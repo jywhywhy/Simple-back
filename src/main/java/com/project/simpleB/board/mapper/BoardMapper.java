@@ -12,5 +12,9 @@ public interface BoardMapper {
 
     List<Board> list();
 
-    Board detail(long bId);
+    Board detail(Long bId);
+
+    void delete(Long bId);
+
+    void update(Board build);
 }

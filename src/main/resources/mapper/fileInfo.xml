@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.simpleB.file.mapper.FileInfoMapper">
+    <insert id="save">
+        INSERT INTO FILE_INFO (B_ID, ORIGINAL_NAME, SAVE_NAME) VALUES (#{bId}, #{originalName}, #{saveName})
+    </insert>
+
+    <select id="getFileInfo" resultType="FileInfo">
+        SELECT * FROM FILE_INFO WHERE B_ID = #{bId}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM FILE_INFO WHERE F_ID = #{fId}
+    </delete>
+</mapper>

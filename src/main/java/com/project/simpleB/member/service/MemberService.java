@@ -10,7 +10,7 @@ public interface MemberService {
 
     MemberDTO signIn(MemberDTO memberDTO);
 
-    int signUp(MemberDTO memberDTO);
+    void signUp(MemberDTO memberDTO);
 
     List<MemberDTO> list();
 

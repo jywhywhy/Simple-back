@@ -16,7 +16,7 @@ public class ReplyServiceImpl implements ReplyService{
     private final ReplyMapper replyMapper;
 
     @Override
-    public List<ReplyDTO> list(long bId) {
+    public List<ReplyDTO> list(Long bId) {
         List<Reply> list = replyMapper.list(bId);
 
         if (list.isEmpty()) {
@@ -38,8 +38,8 @@ public class ReplyServiceImpl implements ReplyService{
     }
 
     @Override
-    public int write(ReplyDTO replyDTO) {
-        return replyMapper.write(Reply.builder()
+    public void write(ReplyDTO replyDTO) {
+        replyMapper.write(Reply.builder()
                 .rId(replyDTO.getRId())
                 .bId(replyDTO.getBId())
                 .mId(replyDTO.getMId())

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface ReplyMapper {
-    List<Reply> list(long bId);
+    List<Reply> list(Long bId);
 
     int write(Reply build);
 }

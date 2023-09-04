@@ -21,13 +21,9 @@ public class BoardController {
 
     @PostMapping("/write")
     public ResponseEntity<Void> write(BoardDTO boardDTO) {
-        int check = boardService.write(boardDTO);
+        boardService.write(boardDTO);
 
-        if (check >= 1) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/list")
@@ -42,7 +38,7 @@ public class BoardController {
     }
 
     @GetMapping("/detail/{bId}")
-    public ResponseEntity<BoardDTO> detail(@PathVariable long bId) {
+    public ResponseEntity<BoardDTO> detail(@PathVariable Long bId) {
         BoardDTO boardDTO = boardService.detail(bId);
 
         if (boardDTO == null) {
@@ -50,5 +46,19 @@ public class BoardController {
         }
 
         return new ResponseEntity<>(boardDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{bId}")
+    public ResponseEntity<Void> delete(@PathVariable Long bId) {
+        boardService.delete(bId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Void> update(BoardDTO boardDTO) {
+        boardService.update(boardDTO);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
