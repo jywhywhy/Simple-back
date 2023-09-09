@@ -10,12 +10,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReplyDTO {
-    private long rId;
-    private long bId;
-    private long mId;
+    private Long rId;
+    private Long bId;
+    private Long mId;
     private String rContent;
     private Date rCreateDate;
     private Date rUpdateDate;
     private Long rParentId;
-    private long rDept;
+    private Long rDept;
 }

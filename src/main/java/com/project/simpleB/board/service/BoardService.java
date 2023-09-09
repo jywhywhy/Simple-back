@@ -7,9 +7,13 @@ import java.util.List;
 
 public interface BoardService {
 
-    int write(BoardDTO boardDTO);
+    void write(BoardDTO boardDTO);
 
     List<BoardDTO> list();
 
-    BoardDTO detail(long bId);
+    BoardDTO detail(Long bId);
+
+    void delete(Long bId);
+
+    void update(BoardDTO boardDTO);
 }

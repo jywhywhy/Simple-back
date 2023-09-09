@@ -6,6 +6,9 @@
 <mapper namespace="com.project.simpleB.board.mapper.BoardMapper">
     <insert id="write">
         INSERT INTO BOARD (M_ID, B_TITLE, B_CONTENT) VALUES (#{mId}, #{bTitle}, #{bContent})
+        <selectKey resultType="Long" keyProperty="bId" order="AFTER">
+            SELECT MAX(B_ID) FROM BOARD
+        </selectKey>
     </insert>
 
     <select id="list" resultType="Board">
@@ -15,4 +18,12 @@
     <select id="detail" resultType="Board">
         SELECT * FROM BOARD WHERE B_ID = #{bId}
     </select>
+
+    <delete id="delete">
+        DELETE FROM BOARD WHERE B_ID = #{bId}
+    </delete>
+
+    <update id="update">
+        UPDATE BOARD SET B_TITLE = #{bTitle}, B_CONTENT = #{bContent}, B_UPDATE_DATE = SYSDATE WHERE B_ID = #{bId}
+    </update>
 </mapper>

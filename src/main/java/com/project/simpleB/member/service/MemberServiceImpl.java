@@ -35,8 +35,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public int signUp(MemberDTO memberDTO) {
-        return memberMapper.signUp(Member.builder()
+    public void signUp(MemberDTO memberDTO) {
+        memberMapper.signUp(Member.builder()
                 .mName(memberDTO.getMName())
                 .username(memberDTO.getUsername())
                 .password(memberDTO.getPassword())

@@ -17,7 +17,7 @@ public class ReplyController {
     private final ReplyService replyService;
 
     @GetMapping("/list/{bId}")
-    public ResponseEntity<List<ReplyDTO>> list(@PathVariable long bId) {
+    public ResponseEntity<List<ReplyDTO>> list(@PathVariable Long bId) {
         List<ReplyDTO> list = replyService.list(bId);
 
         if (list == null) {
@@ -29,12 +29,8 @@ public class ReplyController {
 
     @PostMapping("/write")
     public ResponseEntity<Void> write(@RequestBody ReplyDTO replyDTO) {
-        int result = replyService.write(replyDTO);
+        replyService.write(replyDTO);
 
-        if (result >= 1) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

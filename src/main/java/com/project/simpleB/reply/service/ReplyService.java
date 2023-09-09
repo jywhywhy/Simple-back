@@ -5,7 +5,7 @@ import com.project.simpleB.reply.dto.ReplyDTO;
 import java.util.List;
 
 public interface ReplyService {
-    List<ReplyDTO> list(long bId);
+    List<ReplyDTO> list(Long bId);
 
-    int write(ReplyDTO replyDTO);
+    void write(ReplyDTO replyDTO);
 }

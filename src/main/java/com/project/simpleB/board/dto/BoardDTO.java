@@ -12,11 +12,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardDTO {
-    private long bId;
-    private long mId;
+    private Long bId;
+    private Long mId;
     private String bTitle;
     private String bContent;
     private Date bCreateDate;
     private Date bUpdateDate;
-    private long bViews;
+    private Long bViews;
+
+    List<MultipartFile> files;
 }

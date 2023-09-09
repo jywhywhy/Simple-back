@@ -5,7 +5,7 @@ import lombok.*;
 @Getter
 @Builder
 public class Member {
-    private long mId;
+    private Long mId;
     private String mName;
     private String username;
     private String password;
