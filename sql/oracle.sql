@@ -1,14 +1,21 @@
+DROP TABLE file_info;
 DROP TABLE reply;
 DROP TABLE board;
 DROP TABLE member;
 
+DROP SEQUENCE seq_file_info;
 DROP SEQUENCE seq_reply;
 DROP SEQUENCE seq_board;
 DROP SEQUENCE seq_member;
 
+DROP TRIGGER trg_file_info;
 DROP TRIGGER trg_reply;
 DROP TRIGGER trg_board;
 DROP TRIGGER trg_member;
+
+CREATE SEQUENCE seq_file_info
+    START WITH 1
+    INCREMENT BY 1;
 
 CREATE SEQUENCE seq_reply
     START WITH 1
@@ -50,6 +57,19 @@ CREATE TABLE reply(
                       r_dept NUMBER DEFAULT 0
 );
 
+CREATE TABLE file_info(
+                          f_id NUMBER PRIMARY KEY ,
+                          b_id NUMBER NOT NULL REFERENCES board(b_id) ,
+                          originalName varchar2(50) NOT NULL ,
+                          saveName varchar2(100) NOT NULL
+);
+
+CREATE OR Replace TRIGGER trg_file_info
+    BEFORE INSERT ON file_info
+    FOR EACH ROW
+BEGIN
+    :NEW.f_id := seq_file_info.NEXTVAL;
+END;
 
 CREATE OR REPLACE TRIGGER trg_reply
     BEFORE INSERT ON reply
@@ -80,4 +100,3 @@ ORDER SIBLINGS BY r_id;
 
 COMMIT;
 
-delete from reply where r_id = 14;

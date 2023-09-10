@@ -36,7 +36,6 @@ public class BoardServiceImpl implements BoardService{
 
         if (!CollectionUtils.isEmpty(boardDTO.getFiles())) {
             try {
-
                 List<FileInfoDTO> fileList = FileUtil.uploadFiles(boardDTO.getFiles());
                 fileInfoService.saveFile(board.getBId(), fileList);
             } catch (IOException e) {
@@ -50,7 +49,7 @@ public class BoardServiceImpl implements BoardService{
     public List<BoardDTO> list() {
         List<Board> list = boardMapper.list();
 
-        if (list.isEmpty()) {
+        if (CollectionUtils.isEmpty(list)) {
             return null;
         }
 
@@ -90,7 +89,7 @@ public class BoardServiceImpl implements BoardService{
     public void delete(Long bId) {
         List<FileInfo> list = fileInfoService.getFileInfo(bId);
 
-        if (!list.isEmpty()) {
+        if (!CollectionUtils.isEmpty(list)) {
             FileUtil.deleteFiles(list.stream()
                     .map(fileInfo -> FileInfoDTO.builder()
                             .fId(fileInfo.getFId())

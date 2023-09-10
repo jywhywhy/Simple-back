@@ -5,6 +5,7 @@ import com.project.simpleB.reply.entity.Reply;
 import com.project.simpleB.reply.mapper.ReplyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ public class ReplyServiceImpl implements ReplyService{
     public List<ReplyDTO> list(Long bId) {
         List<Reply> list = replyMapper.list(bId);
 
-        if (list.isEmpty()) {
+        if (CollectionUtils.isEmpty(list)) {
             return null;
         }
 

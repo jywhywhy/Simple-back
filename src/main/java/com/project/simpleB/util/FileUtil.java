@@ -16,6 +16,12 @@ public class FileUtil {
     private static final String UPLOAD_PATH = Paths.get(System.getProperty("user.home"), "simple_prj").toString();
 
     public static List<FileInfoDTO> uploadFiles(List<MultipartFile> files) throws IOException {
+        File dir = new File(UPLOAD_PATH);
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
         List<FileInfoDTO> fileList = new ArrayList<>();
 
         for (MultipartFile file : files) {
@@ -28,11 +34,6 @@ public class FileUtil {
     private static FileInfoDTO uploadFile(MultipartFile file) throws IOException {
         String originalName = file.getOriginalFilename();
         String saveName = generateSaveName(originalName);
-        File dir = new File(UPLOAD_PATH);
-
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
 
         File uploadFile = new File(getFilePath(saveName));
 

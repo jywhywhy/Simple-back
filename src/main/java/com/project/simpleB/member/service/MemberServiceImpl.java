@@ -6,6 +6,7 @@ import com.project.simpleB.member.entity.Member;
 import com.project.simpleB.member.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public class MemberServiceImpl implements MemberService{
     public List<MemberDTO> list() {
         List<Member> list = memberMapper.list();
 
-        if (list.isEmpty()) {
+        if (CollectionUtils.isEmpty(list)) {
             return null;
         }
 
