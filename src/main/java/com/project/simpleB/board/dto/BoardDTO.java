@@ -1,5 +1,6 @@
 package com.project.simpleB.board.dto;
 
+import com.project.simpleB.paging.Paging;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,6 @@ public class BoardDTO {
     private Date bCreateDate;
     private Date bUpdateDate;
     private Long bViews;
-
-    List<MultipartFile> files;
+    private List<MultipartFile> files;
+    private Paging paging;
 }

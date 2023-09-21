@@ -6,6 +6,7 @@ import com.project.simpleB.board.mapper.BoardMapper;
 import com.project.simpleB.file.dto.FileInfoDTO;
 import com.project.simpleB.file.entity.FileInfo;
 import com.project.simpleB.file.service.FileInfoService;
+import com.project.simpleB.paging.Paging;
 import com.project.simpleB.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,14 +47,13 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<BoardDTO> list() {
-        List<Board> list = boardMapper.list();
-
-        if (CollectionUtils.isEmpty(list)) {
-            return null;
-        }
-
-        return list.stream()
+    public Paging list(int pageIndex) {
+        Paging paging = new Paging();
+        paging.handlePaging(pageIndex, 5);
+        System.out.println("pageIndex = " + pageIndex);
+        List<Board> list = boardMapper.list(paging);
+        int totalCount = boardMapper.count();
+        paging.handlePagingList(list.stream()
                 .map(board -> BoardDTO.builder()
                         .bId(board.getBId())
                         .mId(board.getMId())
@@ -62,7 +62,13 @@ public class BoardServiceImpl implements BoardService{
                         .bCreateDate(board.getBCreateDate())
                         .bViews(board.getBViews())
                         .build())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()), totalCount);
+
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        }
+
+        return paging;
     }
 
     @Override

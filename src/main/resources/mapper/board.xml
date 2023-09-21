@@ -12,7 +12,16 @@
     </insert>
 
     <select id="list" resultType="Board">
-        SELECT * FROM BOARD ORDER BY B_ID DESC
+        SELECT *
+        FROM (
+                 SELECT A.*, ROW_NUMBER() OVER (ORDER BY B_ID DESC) AS RN
+                 FROM BOARD A
+             )
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM BOARD
     </select>
 
     <select id="detail" resultType="Board">

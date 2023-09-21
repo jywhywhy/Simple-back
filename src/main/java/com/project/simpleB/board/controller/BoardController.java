@@ -2,6 +2,7 @@ package com.project.simpleB.board.controller;
 
 import com.project.simpleB.board.dto.BoardDTO;
 import com.project.simpleB.board.service.BoardService;
+import com.project.simpleB.paging.Paging;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,8 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<BoardDTO>> list() {
-        List<BoardDTO> list = boardService.list();
+    public ResponseEntity<Paging> list(@RequestParam(value="pageIndex", required = false, defaultValue = "0") int pageIndex) {
+        Paging list = boardService.list(pageIndex);
 
         if (list == null) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
