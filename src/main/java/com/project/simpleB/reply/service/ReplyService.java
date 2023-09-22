@@ -9,4 +9,6 @@ public interface ReplyService {
     Paging list(Long bId, int pageIndex);
 
     void write(ReplyDTO replyDTO);
+
+    void delete(Long rId);
 }

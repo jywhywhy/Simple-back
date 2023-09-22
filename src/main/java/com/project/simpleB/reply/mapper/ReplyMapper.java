@@ -14,4 +14,6 @@ public interface ReplyMapper {
     int write(Reply build);
 
     int count(Long bId);
+
+    void delete(Long rId);
 }

@@ -43,4 +43,8 @@
                 #{rDept}
                 )
     </insert>
+
+    <delete id="delete">
+        DELETE FROM REPLY WHERE R_ID = #{rId}
+    </delete>
 </mapper>

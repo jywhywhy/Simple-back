@@ -55,4 +55,9 @@ public class ReplyServiceImpl implements ReplyService{
                 .rDept(replyDTO.getRDept())
                 .build());
     }
+
+    @Override
+    public void delete(Long rId) {
+        replyMapper.delete(rId);
+    }
 }
