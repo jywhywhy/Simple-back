@@ -7,6 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Data
 public class Paging {
     private int pageIndex;
     private int startRow;
@@ -17,17 +18,17 @@ public class Paging {
     private int totalCount;
     private List<?> list;
 
-    public void handlePaging(int pageIndex, int pageSize) {
+    public Paging(int pageIndex, int pageSize) {
         this.pageIndex = Math.max(pageIndex, 1);
         this.pageSize = Math.max(pageSize, 1);
         this.startRow = ((this.pageIndex - 1) * this.pageSize) + 1;
         this.endRow = this.pageIndex * this.pageSize;
     }
 
-    public void handlePagingList(List<?> list, int totalCount) {
+    public void pagingList(List<?> list, int totalCount) {
         this.list = list;
         this.totalCount = totalCount;
         this.startPage = ((pageIndex - 1) / this.pageSize) * this.pageSize + 1;
-        this.endPage = Math.min(startPage + this.pageSize - 1, this.totalCount);
+        this.endPage = (startPage + this.pageSize) - 1;
     }
 }

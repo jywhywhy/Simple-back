@@ -1,5 +1,6 @@
 package com.project.simpleB.reply.service;
 
+import com.project.simpleB.paging.Paging;
 import com.project.simpleB.reply.dto.ReplyDTO;
 import com.project.simpleB.reply.entity.Reply;
 import com.project.simpleB.reply.mapper.ReplyMapper;
@@ -17,14 +18,16 @@ public class ReplyServiceImpl implements ReplyService{
     private final ReplyMapper replyMapper;
 
     @Override
-    public List<ReplyDTO> list(Long bId) {
-        List<Reply> list = replyMapper.list(bId);
+    public Paging list(Long bId, int pageIndex) {
+        Paging paging = new Paging(pageIndex, 2);
+        List<Reply> list = replyMapper.list(bId, paging);
+        int totalCount = replyMapper.count(bId);
 
         if (CollectionUtils.isEmpty(list)) {
             return null;
         }
 
-        return list.stream()
+        paging.pagingList(list.stream()
                 .map(reply -> ReplyDTO.builder()
                         .rId(reply.getRId())
                         .bId(reply.getBId())
@@ -35,7 +38,10 @@ public class ReplyServiceImpl implements ReplyService{
                         .rParentId(reply.getRParentId())
                         .rDept(reply.getRDept())
                         .build())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()), totalCount);
+        System.out.println("paging = " + paging);
+
+        return paging;
     }
 
     @Override

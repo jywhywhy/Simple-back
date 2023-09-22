@@ -7,7 +7,6 @@ import com.project.simpleB.paging.Paging;
 import java.util.List;
 
 public interface BoardService {
-
     void write(BoardDTO boardDTO);
 
     Paging list(int pageIndex);

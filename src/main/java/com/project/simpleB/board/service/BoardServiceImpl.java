@@ -43,17 +43,19 @@ public class BoardServiceImpl implements BoardService{
                 throw new RuntimeException(e);
             }
         }
-
     }
 
     @Override
     public Paging list(int pageIndex) {
-        Paging paging = new Paging();
-        paging.handlePaging(pageIndex, 5);
-        System.out.println("pageIndex = " + pageIndex);
+        Paging paging = new Paging(pageIndex, 5);
         List<Board> list = boardMapper.list(paging);
         int totalCount = boardMapper.count();
-        paging.handlePagingList(list.stream()
+
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        }
+
+        paging.pagingList(list.stream()
                 .map(board -> BoardDTO.builder()
                         .bId(board.getBId())
                         .mId(board.getMId())
@@ -63,10 +65,6 @@ public class BoardServiceImpl implements BoardService{
                         .bViews(board.getBViews())
                         .build())
                 .collect(Collectors.toList()), totalCount);
-
-        if (CollectionUtils.isEmpty(list)) {
-            return null;
-        }
 
         return paging;
     }
@@ -108,7 +106,6 @@ public class BoardServiceImpl implements BoardService{
             for (FileInfo file : list) {
                 fileInfoService.delete(list);
             }
-
         }
 
         boardMapper.delete(bId);
@@ -117,7 +114,6 @@ public class BoardServiceImpl implements BoardService{
     @Override
     @Transactional
     public void update(BoardDTO boardDTO) {
-
         boardMapper.update(Board.builder()
                 .bId(boardDTO.getBId())
                 .mId(boardDTO.getMId())
@@ -128,7 +124,7 @@ public class BoardServiceImpl implements BoardService{
         if (!CollectionUtils.isEmpty(boardDTO.getFiles())) {
             List<FileInfo> list = fileInfoService.getFileInfo(boardDTO.getBId());
 
-            if (!list.isEmpty()) {
+            if (!CollectionUtils.isEmpty(list)) {
                 FileUtil.deleteFiles(list.stream()
                         .map(fileInfo -> FileInfoDTO.builder()
                                 .fId(fileInfo.getFId())
@@ -138,16 +134,12 @@ public class BoardServiceImpl implements BoardService{
                                 .build())
                         .collect(Collectors.toList()));
 
-                for (FileInfo file : list) {
-                    fileInfoService.delete(list);
-                }
-
+                fileInfoService.delete(list);
             }
 
             try {
                 List<FileInfoDTO> files = FileUtil.uploadFiles(boardDTO.getFiles());
                 fileInfoService.saveFile(boardDTO.getBId(), files);
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

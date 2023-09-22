@@ -1,13 +1,17 @@
 package com.project.simpleB.reply.mapper;
 
+import com.project.simpleB.paging.Paging;
 import com.project.simpleB.reply.entity.Reply;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface ReplyMapper {
-    List<Reply> list(Long bId);
+    List<Reply> list(@Param("bId") Long bId, Paging paging);
 
     int write(Reply build);
+
+    int count(Long bId);
 }

@@ -34,9 +34,7 @@ public class FileUtil {
     private static FileInfoDTO uploadFile(MultipartFile file) throws IOException {
         String originalName = file.getOriginalFilename();
         String saveName = generateSaveName(originalName);
-
         File uploadFile = new File(getFilePath(saveName));
-
         file.transferTo(uploadFile);
 
         return FileInfoDTO.builder()
@@ -60,6 +58,7 @@ public class FileUtil {
 
     private static void deleteFile(String saveName) {
         File file = new File(getFilePath(saveName));
+
         if (file.exists()) {
             file.delete();
         }

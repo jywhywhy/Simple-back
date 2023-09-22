@@ -6,11 +6,24 @@
 <mapper namespace="com.project.simpleB.reply.mapper.ReplyMapper">
     <select id="list" resultType="Reply">
         SELECT *
-        FROM REPLY
-        WHERE B_ID = #{bId}
-        START WITH R_PARENT_ID IS NULL
-        CONNECT BY PRIOR R_ID = R_PARENT_ID
-        ORDER SIBLINGS BY R_ID
+        FROM (
+                 SELECT
+                     R.*,
+                     ROWNUM AS RN
+                 FROM (
+                          SELECT *
+                          FROM REPLY
+                          WHERE B_ID = #{bId}
+                          START WITH R_PARENT_ID IS NULL
+                          CONNECT BY PRIOR R_ID = R_PARENT_ID
+                          ORDER SIBLINGS BY R_ID
+                      ) R
+             )
+        WHERE RN BETWEEN #{paging.startRow} AND #{paging.endRow}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM REPLY WHERE B_ID = #{bId}
     </select>
 
     <insert id="write">
