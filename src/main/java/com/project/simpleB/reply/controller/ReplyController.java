@@ -36,6 +36,7 @@ public class ReplyController {
     @DeleteMapping("/delete/{rId}")
     public ResponseEntity<Void> delete(@PathVariable Long rId) {
         replyService.delete(rId);
-        return null;
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
