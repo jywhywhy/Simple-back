@@ -1,4 +1,5 @@
 DROP TABLE reply;
+DROP TABLE file_info;
 DROP TABLE board;
 DROP TABLE member;
 
@@ -18,6 +19,7 @@ CREATE TABLE board(
                       b_update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                       b_views INT DEFAULT 0,
                       FOREIGN KEY (m_id) REFERENCES member(m_id)
+                          ON DELETE CASCADE
 );
 
 CREATE TABLE reply(
@@ -29,9 +31,12 @@ CREATE TABLE reply(
                       r_update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                       r_parent_id INT,
                       r_dept INT DEFAULT 0,
-                      FOREIGN KEY (b_id) REFERENCES board(b_id),
-                      FOREIGN KEY (m_id) REFERENCES member(m_id),
+                      FOREIGN KEY (b_id) REFERENCES board(b_id)
+                          ON DELETE CASCADE ,
+                      FOREIGN KEY (m_id) REFERENCES member(m_id)
+                          ON DELETE CASCADE ,
                       FOREIGN KEY (r_parent_id) REFERENCES reply(r_id)
+                          ON DELETE CASCADE
 );
 
 DROP PROCEDURE replyHierarchy;
