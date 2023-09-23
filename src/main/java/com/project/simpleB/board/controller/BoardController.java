@@ -2,16 +2,11 @@ package com.project.simpleB.board.controller;
 
 import com.project.simpleB.board.dto.BoardDTO;
 import com.project.simpleB.board.service.BoardService;
-import com.project.simpleB.paging.Paging;
+import com.project.simpleB.common.Paging;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

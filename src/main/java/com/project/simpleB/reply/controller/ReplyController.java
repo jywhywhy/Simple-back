@@ -1,14 +1,12 @@
 package com.project.simpleB.reply.controller;
 
-import com.project.simpleB.paging.Paging;
+import com.project.simpleB.common.Paging;
 import com.project.simpleB.reply.dto.ReplyDTO;
 import com.project.simpleB.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

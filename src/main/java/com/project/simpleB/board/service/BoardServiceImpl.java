@@ -6,8 +6,9 @@ import com.project.simpleB.board.mapper.BoardMapper;
 import com.project.simpleB.file.dto.FileInfoDTO;
 import com.project.simpleB.file.entity.FileInfo;
 import com.project.simpleB.file.service.FileInfoService;
-import com.project.simpleB.paging.Paging;
-import com.project.simpleB.util.FileUtil;
+import com.project.simpleB.common.Paging;
+import com.project.simpleB.common.FileUtil;
+import com.project.simpleB.member.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class BoardServiceImpl implements BoardService{
 
     private final BoardMapper boardMapper;
+    private final MemberMapper memberMapper;
     private final FileInfoService fileInfoService;
 
     @Override
@@ -47,7 +49,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public Paging list(int pageIndex) {
-        Paging paging = new Paging(pageIndex, 5);
+        Paging paging = new Paging(pageIndex, 8);
         List<Board> list = boardMapper.list(paging);
         int totalCount = boardMapper.count();
 
@@ -59,6 +61,7 @@ public class BoardServiceImpl implements BoardService{
                 .map(board -> BoardDTO.builder()
                         .bId(board.getBId())
                         .mId(board.getMId())
+                        .mName(memberMapper.memberName(board.getMId()))
                         .bTitle(board.getBTitle())
                         .bContent(board.getBContent())
                         .bCreateDate(board.getBCreateDate())
@@ -80,6 +83,7 @@ public class BoardServiceImpl implements BoardService{
         return BoardDTO.builder()
                 .bId(board.getBId())
                 .mId(board.getMId())
+                .mName(memberMapper.memberName(board.getMId()))
                 .bTitle(board.getBTitle())
                 .bContent(board.getBContent())
                 .bViews(board.getBViews())

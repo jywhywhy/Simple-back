@@ -2,9 +2,7 @@ package com.project.simpleB.board.service;
 
 
 import com.project.simpleB.board.dto.BoardDTO;
-import com.project.simpleB.paging.Paging;
-
-import java.util.List;
+import com.project.simpleB.common.Paging;
 
 public interface BoardService {
     void write(BoardDTO boardDTO);

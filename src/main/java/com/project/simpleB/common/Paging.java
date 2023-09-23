@@ -1,6 +1,5 @@
-package com.project.simpleB.paging;
+package com.project.simpleB.common;
 
-import com.project.simpleB.board.entity.Board;
 import lombok.*;
 
 import java.util.List;

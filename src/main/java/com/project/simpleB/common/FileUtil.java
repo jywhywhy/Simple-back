@@ -1,4 +1,4 @@
-package com.project.simpleB.util;
+package com.project.simpleB.common;
 
 import com.project.simpleB.file.dto.FileInfoDTO;
 import org.springframework.util.StringUtils;

@@ -13,4 +13,5 @@ public interface MemberMapper {
 
     List<Member> list();
 
+    String memberName(Long mId);
 }

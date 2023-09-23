@@ -1,6 +1,6 @@
 package com.project.simpleB.reply.mapper;
 
-import com.project.simpleB.paging.Paging;
+import com.project.simpleB.common.Paging;
 import com.project.simpleB.reply.entity.Reply;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

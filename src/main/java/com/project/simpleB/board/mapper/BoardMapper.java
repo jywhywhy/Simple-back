@@ -1,7 +1,7 @@
 package com.project.simpleB.board.mapper;
 
 import com.project.simpleB.board.entity.Board;
-import com.project.simpleB.paging.Paging;
+import com.project.simpleB.common.Paging;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

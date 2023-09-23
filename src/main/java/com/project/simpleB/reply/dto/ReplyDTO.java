@@ -13,6 +13,7 @@ public class ReplyDTO {
     private Long rId;
     private Long bId;
     private Long mId;
+    private String mName;
     private String rContent;
     private Date rCreateDate;
     private Date rUpdateDate;

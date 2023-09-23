@@ -7,7 +7,6 @@ import java.util.List;
 
 @Service
 public interface MemberService {
-
     MemberDTO signIn(MemberDTO memberDTO);
 
     void signUp(MemberDTO memberDTO);

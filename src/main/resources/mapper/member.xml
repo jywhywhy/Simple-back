@@ -18,4 +18,10 @@
         SELECT *
         FROM MEMBER
     </select>
+
+    <select id="memberName" resultType="String">
+        SELECT M_NAME
+        FROM MEMBER
+        WHERE M_ID = #{mId}
+    </select>
 </mapper>

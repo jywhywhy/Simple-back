@@ -38,7 +38,8 @@ CREATE TABLE member(
 
 CREATE TABLE board(
                       b_id NUMBER PRIMARY KEY ,
-                      m_id NUMBER NOT NULL REFERENCES member(m_id) ,
+                      m_id NUMBER NOT NULL REFERENCES member(m_id)
+                          ON DELETE CASCADE ,
                       b_title VARCHAR2(30) NOT NULL ,
                       b_content CLOB NOT NULL ,
                       b_create_date DATE DEFAULT SYSDATE ,
@@ -53,15 +54,17 @@ CREATE TABLE reply(
                       r_content varchar2(255) NOT NULL ,
                       r_create_date DATE DEFAULT SYSDATE ,
                       r_update_date DATE DEFAULT SYSDATE ,
-                      r_parent_id NUMBER REFERENCES reply(r_id) ,
+                      r_parent_id NUMBER REFERENCES reply(r_id)
+                          ON DELETE CASCADE ,
                       r_dept NUMBER DEFAULT 0
 );
 
 CREATE TABLE file_info(
                           f_id NUMBER PRIMARY KEY ,
-                          b_id NUMBER NOT NULL REFERENCES board(b_id) ,
-                          originalName varchar2(50) NOT NULL ,
-                          saveName varchar2(100) NOT NULL
+                          b_id NUMBER NOT NULL REFERENCES board(b_id)
+                              ON DELETE CASCADE ,
+                          original_name varchar2(50) NOT NULL ,
+                          save_name varchar2(100) NOT NULL
 );
 
 CREATE OR Replace TRIGGER trg_file_info
@@ -99,4 +102,3 @@ CONNECT BY PRIOR r_id = r_parent_id
 ORDER SIBLINGS BY r_id;
 
 COMMIT;
-

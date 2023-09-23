@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public interface FileInfoService {
-
     void saveFile(Long bId, List<FileInfoDTO> fileList);
 
     List<FileInfo> getFileInfo(Long bId);
